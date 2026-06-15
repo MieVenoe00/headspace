@@ -1,42 +1,67 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Pathfinding;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
-    private Vector2 targetPosition;
-    private bool isMoving = false;
+    public float moveSpeed = 6f;
+    public float nextWaypointDistance = 0.1f;
+    public string targetScene = "";
+
+    private Path path;
+    private int currentWaypoint = 0;
+    private bool reachedEnd = false;
+    private Seeker seeker;
     private Rigidbody2D rb;
 
     void Start()
     {
+        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        targetPosition = rb.position;
     }
 
-    void Update()
+    public void GoToLocation(Vector3 destination, string sceneName)
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        targetScene = sceneName;
+        reachedEnd = false;
+        seeker.StartPath(rb.position, destination, OnPathComplete);
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if (!p.error)
         {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(
-                Mouse.current.position.ReadValue()
-            );
-            targetPosition = new Vector2(worldPos.x, worldPos.y);
-            isMoving = true;
+            path = p;
+            currentWaypoint = 0;
+            reachedEnd = false;
+            Debug.Log("Sti fundet! Antal waypoints: " + path.vectorPath.Count);
+        }
+        else
+        {
+            Debug.Log("Sti fejl: " + p.errorLog);
         }
     }
 
     void FixedUpdate()
     {
-        if (isMoving)
-        {
-            Vector2 newPos = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
+        if (path == null) return;
+        if (reachedEnd) return;
 
-            if (Vector2.Distance(rb.position, targetPosition) < 0.05f)
-            {
-                isMoving = false;
-            }
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            reachedEnd = true;
+            Debug.Log("Nået frem!");
+            if (targetScene != "")
+                UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+            return;
+        }
+
+        Vector2 target = path.vectorPath[currentWaypoint];
+        Debug.Log("Går mod waypoint " + currentWaypoint + " af " + path.vectorPath.Count);
+        rb.MovePosition(Vector2.MoveTowards(rb.position, target, moveSpeed * Time.fixedDeltaTime));
+
+        if (Vector2.Distance(rb.position, target) < nextWaypointDistance)
+        {
+            currentWaypoint++;
         }
     }
 }
