@@ -7,16 +7,24 @@ public class CharacterMovement : MonoBehaviour
     public float nextWaypointDistance = 0.1f;
     public string targetScene = "";
 
+    [Header("Retnings-sprites")]
+    public Sprite spriteNed;
+    public Sprite spriteOp;
+    public Sprite spriteVenstre;
+    public Sprite spriteHøjre;
+
     private Path path;
     private int currentWaypoint = 0;
     private bool reachedEnd = false;
     private Seeker seeker;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void GoToLocation(Vector3 destination, string sceneName)
@@ -33,11 +41,6 @@ public class CharacterMovement : MonoBehaviour
             path = p;
             currentWaypoint = 0;
             reachedEnd = false;
-            Debug.Log("Sti fundet! Antal waypoints: " + path.vectorPath.Count);
-        }
-        else
-        {
-            Debug.Log("Sti fejl: " + p.errorLog);
         }
     }
 
@@ -49,14 +52,16 @@ public class CharacterMovement : MonoBehaviour
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEnd = true;
-            Debug.Log("Nået frem!");
             if (targetScene != "")
                 UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
             return;
         }
 
         Vector2 target = path.vectorPath[currentWaypoint];
-        Debug.Log("Går mod waypoint " + currentWaypoint + " af " + path.vectorPath.Count);
+        Vector2 direction = (target - rb.position).normalized;
+
+        SkiftSprite(direction);
+
         rb.MovePosition(Vector2.MoveTowards(rb.position, target, moveSpeed * Time.fixedDeltaTime));
 
         if (Vector2.Distance(rb.position, target) < nextWaypointDistance)
@@ -64,4 +69,19 @@ public class CharacterMovement : MonoBehaviour
             currentWaypoint++;
         }
     }
+
+    void SkiftSprite(Vector2 direction)
+{
+    float threshold = 0.3f; // Hvor meget mere dominant en retning skal være
+
+    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y) + threshold)
+    {
+        spriteRenderer.sprite = direction.x > 0 ? spriteHøjre : spriteVenstre;
+    }
+    else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) + threshold)
+    {
+        spriteRenderer.sprite = direction.y > 0 ? spriteOp : spriteNed;
+    }
+    // Hvis ingen retning er tydeligt dominant, behold nuværende sprite
+}
 }
