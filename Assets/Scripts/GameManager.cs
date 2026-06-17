@@ -5,6 +5,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public string aldersgruppe;
+    public Vector3 kikosSidstePosition;
+    public bool harGemtPosition = false;
+
+    public int antalQuestsGennemført = 0;
 
     void Awake()
     {
@@ -23,5 +27,17 @@ public class GameManager : MonoBehaviour
     {
         aldersgruppe = gruppe;
         Debug.Log("Aldersgruppe valgt: " + aldersgruppe);
+    }
+
+    public void GemKikosPosition(Vector3 position)
+    {
+        kikosSidstePosition = position;
+        harGemtPosition = true;
+    }
+
+    public void TilføjGennemførtQuest()
+    {
+        antalQuestsGennemført++;
+        Debug.Log("Antal gennemførte quests: " + antalQuestsGennemført);
     }
 }

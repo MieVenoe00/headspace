@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9e14a54e85ac443e3a706550a58f0095
+guid: ef744d55319da44d7ae096dfcbcff281
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6461533713798789588
-    second: livbarRegnbue_0
+      213: -2086921116255371532
+    second: worryjar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: livbarRegnbue_0
+      name: worryjar_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 95
-        height: 23
+        width: 768
+        height: 1376
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2600dc62550456a0800000000000000
-      internalID: -6461533713798789588
+      spriteID: 4fe365f3d44c903e0800000000000000
+      internalID: -2086921116255371532
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      livbarRegnbue_0: -6461533713798789588
+      worryjar_0: -2086921116255371532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

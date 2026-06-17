@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e746be33d76841f6a60fa8689142340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToScene
-  nextScene: SampleScene
+  nextScene: MapIntro
   normalSprite: {fileID: 21300000, guid: 73a600f4be67f41f582b59e500dfb349, type: 3}
   activeSprite: {fileID: 21300000, guid: 42889c7a636e345048e175d73d3f8aa3, type: 3}
 --- !u!61 &1651174222

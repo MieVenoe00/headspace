@@ -25,6 +25,11 @@ public class CharacterMovement : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (GameManager.Instance != null && GameManager.Instance.harGemtPosition)
+        {
+            transform.position = GameManager.Instance.kikosSidstePosition;
+        }
     }
 
     public void GoToLocation(Vector3 destination, string sceneName)
@@ -52,6 +57,12 @@ public class CharacterMovement : MonoBehaviour
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEnd = true;
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.GemKikosPosition(transform.position);
+            }
+
             if (targetScene != "")
                 UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
             return;
@@ -71,17 +82,16 @@ public class CharacterMovement : MonoBehaviour
     }
 
     void SkiftSprite(Vector2 direction)
-{
-    float threshold = 0.3f; // Hvor meget mere dominant en retning skal være
+    {
+        float threshold = 0.3f;
 
-    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y) + threshold)
-    {
-        spriteRenderer.sprite = direction.x > 0 ? spriteHøjre : spriteVenstre;
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y) + threshold)
+        {
+            spriteRenderer.sprite = direction.x > 0 ? spriteHøjre : spriteVenstre;
+        }
+        else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) + threshold)
+        {
+            spriteRenderer.sprite = direction.y > 0 ? spriteOp : spriteNed;
+        }
     }
-    else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) + threshold)
-    {
-        spriteRenderer.sprite = direction.y > 0 ? spriteOp : spriteNed;
-    }
-    // Hvis ingen retning er tydeligt dominant, behold nuværende sprite
-}
 }

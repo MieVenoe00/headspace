@@ -776,6 +776,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   aldersgruppe: 
+  kikosSidstePosition: {x: 0, y: 0, z: 0}
+  harGemtPosition: 0
+  "antalQuestsGennemf\xF8rt": 0
 --- !u!4 &587251817
 Transform:
   m_ObjectHideFlags: 0
@@ -1034,8 +1037,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "V\xE6lg din aldersgruppe"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c760f336fa076467f92eb635917575cb, type: 2}
-  m_sharedMaterial: {fileID: -1717984083771259583, guid: c760f336fa076467f92eb635917575cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 173f20e0f2ee647779950e4d5357ced8, type: 2}
+  m_sharedMaterial: {fileID: -8774118773208203389, guid: 173f20e0f2ee647779950e4d5357ced8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1132,7 +1135,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1717984083771259583, guid: c760f336fa076467f92eb635917575cb, type: 2}
+  - {fileID: -8774118773208203389, guid: 173f20e0f2ee647779950e4d5357ced8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
