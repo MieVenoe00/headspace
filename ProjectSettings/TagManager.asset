@@ -44,6 +44,9 @@ TagManager:
   - name: knapper UI
     uniqueID: 350655235
     locked: 0
+  - name: Tekst
+    uniqueID: 2564831639
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []

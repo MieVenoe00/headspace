@@ -1705,7 +1705,7 @@ MonoBehaviour:
   kikoPapir: {fileID: 445645462}
   text1: {fileID: 814369056}
   nextArrow: {fileID: 135183150}
-  ventetid: 3
+  ventetid: 1
 --- !u!212 &1222808602
 SpriteRenderer:
   serializedVersion: 2

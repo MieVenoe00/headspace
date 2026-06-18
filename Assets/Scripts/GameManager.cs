@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public int antalQuestsGennemført = 0;
 
+    public bool harSetSampleIntro = false;
+
     void Awake()
     {
         if (Instance == null)
